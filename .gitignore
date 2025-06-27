@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Secrets / data
+.env
+service_account.json
+log.db
+creds.b64
+
+# VS Code
+.vscode/
