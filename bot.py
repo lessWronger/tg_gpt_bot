@@ -14,6 +14,7 @@ from telegram.ext import (
     ContextTypes, filters
 )
 from openai import AsyncOpenAI        # новый клиент
+from datetime import time, timezone, timedelta
 
 # ── 1. окружение ───────────────────────────────────────────
 load_dotenv()                         # читает .env локально
@@ -113,7 +114,7 @@ def main() -> None:
     # JobQueue работает, если PTB установлен с extras [job-queue]
     app.job_queue.run_daily(
         daily_ping,
-        time=datetime.time(hour=9, tzinfo=datetime.timezone.utc)
+        time=time(hour=8, tzinfo=timezone(timedelta(hours=5)))  # Екатеринбург (UTC+5)
     )
 
     log.info("Bot started — waiting for messages…")
