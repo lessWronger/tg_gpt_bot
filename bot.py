@@ -112,7 +112,10 @@ def main() -> None:
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, relay))
 
     # JobQueue работает, если PTB установлен с extras [job-queue]
-    app.job_queue.run_repeating(daily_ping, interval=60, first=10)
+    app.job_queue.run_daily(
+        daily_ping,
+        time=time(hour=8, tzinfo=timezone(timedelta(hours=5)))  # Екатеринбург (UTC+5)
+    )
 
     log.info("Bot started — waiting for messages…")
     app.run_polling()          # не запускай вторую копию параллельно!
